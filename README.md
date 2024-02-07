@@ -28,7 +28,8 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>No console AWS, vá para o Painel EC2;</li>
 <li>No menu posicionado ao lado esquerdo da tela, vá até a seção Rede e Segurança e clique em Pares de Chaves;</li>
 <li>Na próxima tela, no lado superior direito, clique em Criar par de chaves;</li>
-<li>A tela de criação será aberta e nela você podera escolher um nome para o par de chaves. No meu caso, criei a chave "chave2_sergio_compass";</li>
+<li>A tela de criação será aberta e nela você poderá escolher um nome para o par de chaves. No meu caso, criei a chave "chave2_sergio_compass";</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/ed421a36-89ec-4a4b-8c67-1dec256dc4ec" alt="Print da tela de cadastro de par de chave">
 <li>Mantenha as configurações restantes e na opção Formato de arquivo de chave privada, selecione o formato .ppk, necessário para acessar a instância via Putty, como iremos fazer;</li>
 <li>Feito isso, basta clicar em Criar Par de Chaves;</li>
 <li>Salve em lugar seguro o arquivo gerado e pronto, o par de chave estará disponível e listado no menu.</li>
@@ -39,6 +40,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Na próxima tela, no lado superior direito, clique em Executar instância;</li>
 <li>Agora é possível criar um nome para a instância e criar tags. No meu caso, criei as tags Nome, CostCenter e Project, de acordo com as recomendações dos instrutores.</li>
 <li>Selecione o sistema Amazon Linux AWS e, em seguida a imagem Amazon Linux 2 AMI (HVM), SSD Volume Type;</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/f204dcb6-c005-4200-af02-a9d1d5308336" alt="Print da AMI">
 <li>Em Tipo de instância, escolha t3.small;</li>
 <li>Em Par de Chaves, selecione a chave criada anteriormente;</li>
 <li>Em configurações de Rede, selecione a opção Criar Grupo de segurança;</li>
