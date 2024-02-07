@@ -7,7 +7,7 @@ A execução do projeto se dará em duas partes: a primeira ocorrerá dentro do 
 <ul>
 <li>Gerar uma chave pública para acesso ao ambiente;</li>
 <li>Criar 1 instância EC2 com o sistema operacional Amazon Linux 2 (Família t3.small, 16 GB SSD);</li>
-<li>Gerar 1 elastic IP e anexar à instância EC2;</li>
+<li>Gerar 1 Elastic IP e anexar à instância EC2;</li>
 <li>Liberar as portas de comunicação para acesso público: (22/TCP, 111/TCP e UDP, 2049/TCP/UDP, 80/TCP, 443/TCP).</li>
 </ul>
 <h4>Requisitos Linux</h4>
@@ -48,3 +48,22 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Em Configurar Armazenamento, coloque 16gb de armazenamento gp2(SSD);</li>
 <li>Revise as configurações e clique em Executar Instância.</li>
 </ol>
+<h3>AWS >> Gerar 1 Elastic IP e anexar à instância EC2</h3>
+<ol>
+<li>Na página do serviço EC2, no menu lateral esquerdo, em Rede e Segurança, clique em IPs elásticos;</li>
+<li>Clique em Alocar endereço IP elástico;</li>
+<li>Por padrão, o Grupo de borda de Rede já vem selecionado, assim como o Conjunto de endereços IPv4 públicos da Amazon;</li>
+<li>Clique em Alocar;</li>
+<li>Depois da criação, selecione o IP na lista, clique em Ações no menu superior, e depois em Associar endereço IP elástico;</li>
+<li>Selecione a instância EC2 criada anteriormente;</li>
+<li>Depois de selecionar a instância será preciso selecionar o endereço IP privado, que será sugerido pela própria plataforma, bastando confirmar;</li>
+<li>Marque a opção Permitir que o endereço IP elástico seja reassociado e clique em Associar.</li>
+</ol>
+<h3>AWS >> Liberar as portas de comunicação para acesso público</h3>
+<ol>
+<li>Na página do serviço EC2, no menu lateral esquerdo, em Rede e Segurança, clique em Security groups;</li>
+<li>Selecione o grupo de segurança que foi criado juntamente com a instância EC2;</li>
+<li>Clique em Regras de entrada, na parte inferior, e depois, do lado direito da tela, em Editar regras de entrada;</li>
+</ol>
+
+
