@@ -190,7 +190,7 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 <ol>
 <li>Execute o comande de atualização do sistema <code>sudo yum update -y</code> antes de iniciar instalações, para garantir que serão sempre as versões mais atualizadas dos arquivos Linux que estarão rodando;</li>
 <li>Com o comando <code>sudo yum install -y amazon-efs-utils</code> instale o pacote para suporte ao NFS. É um protocolo que permite compartilhar diretórios e arquivos entre sistemas operacionais em uma rede.;</li>
-<li>Crie um diretório local que servirá como ponto de montagem. Utilize o comando <code>sudo mkdir /mnt/efs</code>;</li>
+<li>Utilize o comando <code>sudo mkdir /mnt/efs</code> para criar um diretório local que servirá como ponto de montagem;</li>
 <li>Agora vamos montar o sistema de arquivos. Para isso, é preciso utilizar o comando que foi copiado anteriormente, <code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>, lembrando que cada um terá o seu próprio DNS, diponibilizado nos detalhes do serviço na AWS, e caminho local, que aqui foi nomeado como /mnt/efs;</li>
     <h4>Configurando montagem automática</h4>
     Também é possível realizar uma configuração para que a montagem ocorra automaticamente.
