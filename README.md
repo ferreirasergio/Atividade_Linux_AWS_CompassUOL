@@ -154,11 +154,12 @@ Antes, vamos configurar um grupo de segurança que será utilizada para a rede d
 <li>Mantenha as opções pré-definidas, altere apenas o grupo de segurança para o grupo que criamos para o serviço EFS;</li>
 <li>Revise as informações e clique em Criar para terminar;</li>
 <li>Na lista de sistemas criados, abra o sistema de arquivos recém feito e clique no botão Anexar para visualizar as opções de montagem (IP ou DNS);</li>
-<li>A AWS já nos apresenta comandos definidos de acordo com as opções escolhidas. Aqui, vamos utilizar a montagem via DNS usando o cliente do NFS. Copie-o e salve em um bloco de notas, pois irá precisar dele mais adiante.</li>
+<li>A AWS já nos apresenta comandos definidos de acordo com as opções escolhidas. Aqui, vamos utilizar a montagem via DNS usando o cliente do NFS. Copie-o e salve em um bloco de notas, pois irá precisar dele mais adiante. O comando segue o seguinte modelo:</li>
+<code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>
 </ol>
 
 <br>
-👍 Pronto! Nossas configurações do ambiente AWS estão prontas. Agora seguimos para as configurações da máquina Linux, o acesso da instância e a realização de alguns comandos. 👍
+👍 Pronto! Nossas configurações do ambiente AWS foram devidamente realizadas. Agora seguimos para as configurações da máquina Linux, o acesso da instância e a realização de alguns comandos. 👍
 <br>
 
 Antes de iniciarmos os próximos passos será preciso:
@@ -166,7 +167,7 @@ Antes de iniciarmos os próximos passos será preciso:
 <li>Baixar e instalar a versão mais atualizada do PuTTY, de preferência diretamente da página oficial. O PuTTY é um cliente SSH gratuito para Windows.</li>
 <li>Ir até os detalhes da sua instância EC2, no console AWS, e copiar as informações do DNS público. Esse informação geralmente termina com os termos "amazonaws.com".</li>
 </ul>
-
+Estando com o PuTTY instalado:
 <h3>Putty >> Acessando a instância via PuTTY</h3>
 <ol>
 <li>Inicie o PuTTY em sua máquina;</li>
@@ -182,6 +183,26 @@ Antes de iniciarmos os próximos passos será preciso:
 <li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept;</li>
 <li>Em seguida, será aberta a tela do terminal da máquina windows da instância.</li>
 </ol>
+
+<h3>Linux >> Montando o sistema de arquivos do EFS na máquina</h3>
+A partir de agora nossas ações serão feitas no terminal Linux da instância EC2 que o PuTTY nos conectou.<br>
+Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilégios administrativos.
+<ol>
+<li>Execute o comande de atualização do sistema <code>sudo yum update -y</code> antes de iniciar instalações, para garantir que serão sempre as versões mais atualizadas dos arquivos Linux que estarão rodando;</li>
+<li>Com o comando <code>sudo yum install -y amazon-efs-utils</code> instale o pacote para suporte ao NFS. É um protocolo que permite compartilhar diretórios e arquivos entre sistemas operacionais em uma rede.;</li>
+<li>Crie um diretório local que servirá como ponto de montagem. Utilize o comando <code>sudo mkdir /mnt/efs</code>;</li>
+<li>Agora vamos montar o sistema de arquivos. Para isso, é preciso utilizar o comando que foi copiado anteriormente, <code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>, lembrando que cada um terá o seu próprio DNS, diponibilizado nos detalhes do serviço na AWS, e caminho local, que aqui foi nomeado como /mnt/efs;</li>
+    <h4>Configurando montagem automática</h4>
+    Também é possível realizar uma configuração para que a montagem ocorra automaticamente.
+    <ol>
+    <li>Digite o comando <code>sudo nano /etc/fstab</code> para abrir o arquivo para edição;</li>
+    <li>Dentro do arquivo, acrescente a linha <code>[ID do sismeta de arquivos]:/ [caminho local] nfs4 nfsvers=4.1,rsize=1048576wsize=1048576,hard,timeo=600,retrans=2,noresvport,_netdev 0 0</code>. Note que é basicamente o comando que já utilizamos, mas com os blocos invertidos.</li>
+    <li>Substitua o ID do sistema e o caminho local pelas suas próprias credenciais</li>
+    <li>Confirme se o sistema de arquivos EFS está montado corretamente usando o comando <code>df -h</code></li>
+    </ol>
+</ol>
+
+<h3>Linux >> Configurando Apache</h3>
 
 
 
