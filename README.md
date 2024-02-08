@@ -172,6 +172,7 @@ Estando com o PuTTY instalado:
 <ol>
 <li>Inicie o PuTTY em sua máquina;</li>
 <li>No painel Category, no lado esquerdo, selecione Session;</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/fbf451d4-8364-409a-af81-421db224156c" alt="Tela inicial do PuTTY">
 <li>Na caixa Host Name digite o nome de usuário da instância (por padrão, nas máquinas Amazon Linux, é ec2-user), seguido de @ e o DNS público da instância (aquele que termina com "amazonaws.com.</li>
 <li>A estrutura desse comando é "instance-user-name@instance-public-dns-name";</li>
 <li>Verifique se o valor do Port está em 22;</li>
@@ -182,6 +183,7 @@ Estando com o PuTTY instalado:
 <li>Clique em Open, na parte inferior e pronto, o PuTTY fará o acesso à instância EC2 criada e informana, caso as informações de DNS público e o arquivo .ppk estejam corretos;</li>
 <li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept;</li>
 <li>Em seguida, será aberta a tela do terminal da máquina windows da instância.</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/98cb43a4-9c71-4cd0-908e-342f885559c6" alt="Texto Alternativo">
 </ol>
 
 <h3>Linux >> Montando o sistema de arquivos do EFS na máquina</h3>
@@ -209,10 +211,13 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 <li>Inicie o Apache no sistema com o comando <code>sudo systemctl start httpd</code> ou ainda o <code>sudo /bin/systemctl start httpd.service</code>;</li>
 <li>Para o Apache iniciar automaticamente, execute o comando <code>sudo systemctl enable httpd</code>;</li>
 <li>Verifique se o apache está em execução através do comando <code>sudo systemctl status httpd</code>;</li>
-O Apache já vem com uma página inicial padrão que pode ser acessada atravé da digitação do IP público na barra de endereço de um navegador. Mas também é possível editar essa página HTML para que exiba o que você quiser. Isso é feito a partir de um arquivo index que pode ser criado dentro do diretório do Apache.
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/afeb0b4e-569d-4861-a127-9646ab44a87c" alt="Texto Alternativo">
+<li>O Apache já vem com uma página inicial padrão que pode ser acessada atravé da digitação do IP público na barra de endereço de um navegador. Mas também é possível editar essa página HTML para que exiba o que você quiser. Isso é feito a partir de um arquivo index que pode ser criado dentro do diretório do Apache;</li>
 <li>Para criar/editar esse arquivo, digite o comando <code>sudo nano index.html</code>. O arquivo HTML que você digitar nesse documento é o que será mostrado na página acessada pelo IP público. Veja a seguir um exemplo de documento HTML para o serviço:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/8e9df0a5-8920-4ad7-b661-7cc3b7367887" alt="Texto Alternativo">
 <li>Para salvar o documento no editor nano, aperte ctrl+x, depois y e confirme apertando enter;</li>
 <li>Para acessar a página e ver se funcionou, basta colar o IP público da instância (informação disponível nos detalhes da instância na AWS) na barra de endereço de um navegador.</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/90610cad-f8c4-44fb-81d3-393939ef543e" alt="Texto Alternativo">
 </ol>
 
 <h3>LINUX >> Criando um script que valide se o serviço está online ou ofline e envie o resultado da validação para o seu diretório no NFS</h3>
