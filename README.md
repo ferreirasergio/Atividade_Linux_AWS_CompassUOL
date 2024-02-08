@@ -57,14 +57,14 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Revise as configurações e clique em Executar Instância.</li>
 </ol>
 
-⚠️Antes de gerarmos o IP elástico, é iportante criarmos um Gateway de Internet para garantirmos a conexão da rede com a internet.⚠️
+⚠️Antes de gerarmos o IP elástico, é importante criarmos um Gateway de Internet para garantirmos a conexão da rede com a internet.⚠️
 
 <h3>AWS >> Criando Gateway de Internet</h3>
 <ol>
 <li>No console da AWS, acesse o painel do serviço VPC. Clique em Gateways de internet no menu lateral esquerdo;</li>
 <li>Clique em Criar gateway de internet;</li>
 <li>Defina um nome para o gateway e clique em Criar gateway de internet. Lembre-me desse nome, pois vamos precisar dele mais adiante;</li>
-<li>Selecioneo gateway criado na lista e depois clique em Ações, no menu superior, escolhando a opção Associar à VPC;</li>
+<li>Selecione o gateway criado na lista e depois clique em Ações, no menu superior, escolhendo a opção Associar à VPC;</li>
 <li>Selecione a VPC da instância EC2 criada anteriormente e clique em Associar. A VPC será listada automaticamente no campo, bastando confirmar;</li>
 </ol>
 
@@ -84,7 +84,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <h3>AWS >> Liberar as portas de comunicação para acesso público 🌐 </h3>
 <ol>
 <li>Na página do serviço EC2, no menu lateral esquerdo, em Rede e Segurança, clique em Security groups;</li>
-<li>Selecione o grupo de segurança que foi criado juntamente com a instância EC2;</li>
+<li>Selecione o grupo de segurança que foi criado com a instância EC2;</li>
 <li>Clique em Regras de entrada, na parte inferior, e depois, do lado direito da tela, em Editar regras de entrada;</li>
 <li>Por padrão, já temos uma regra de entrada, do Tipo SSH, no Intervalo de portas 22, Protocolo TCP. Essa regra será mantida;</li>
 <li>Clique em Adicionar regras. Agora iremos acrescentar a liberação de outras portas, além da 22 que já consta, conforme indicado na tabela abaixo:</li>
@@ -119,7 +119,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 
 <h3>AWS >> Configurar rota de sub-rede ↩️ </h3>
 <ol>
-<li>Antes de configurarmos a rota da sub-rede, é preciso ir até o Painel EC2, clicar na opção Intâncias, selecionar a instância criada na lista e verificar nos detalhes abaixo em qual sub-rede ela está localizada. Munidos dessa informação, retornamos para o Painel VPC, no mesmo campo Tabela de rotas que entramos na configuração anterior;</li>
+<li>Antes de configurarmos a rota da sub-rede, é preciso ir até o Painel EC2, clicar na opção Instâncias, selecionar a instância criada na lista e verificar nos detalhes abaixo em qual sub-rede ela está localizada. Munidos dessa informação, retornamos para o Painel VPC, no mesmo campo Tabela de rotas que entramos na configuração anterior;</li>
 <li>Selecione apenas e exatamente a sub-rede na qual a instância EC2 criada está localizada;</li>
 <li>Clique em Ações, no menu superior e selecione a opção Editar rotas;</li>
 <li>A partir de agora, faremos basicamente a mesma coisa que fizemos na configuração da VPC principal. Clique em Adicionar rota;</li>
@@ -155,7 +155,7 @@ Antes, vamos configurar um grupo de segurança que será utilizada para a rede d
 <li>Marque a opção One zone e selecione a mesma zona de disponibilidade em que sua instância foi criada e avance;</li>
 <li>Mantenha as opções pré-definidas, altere apenas o grupo de segurança para o grupo que criamos para o serviço EFS;</li>
 <li>Revise as informações e clique em Criar para terminar;</li>
-<li>Na lista de sistemas criados, abra o sistema de arquivos recém feito e clique no botão Anexar para visualizar as opções de montagem (IP ou DNS);</li>
+<li>Na lista de sistemas criados, abra o sistema de arquivos recém-feito e clique no botão Anexar para visualizar as opções de montagem (IP ou DNS);</li>
 <li>A AWS já nos apresenta comandos definidos de acordo com as opções escolhidas. Aqui, vamos utilizar a montagem via DNS usando o cliente do NFS. Copie-o e salve em um bloco de notas, pois irá precisar dele mais adiante. O comando segue o seguinte modelo:</li>
 <code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>
 </ol>
@@ -179,12 +179,12 @@ Estando com o PuTTY instalado:
 <li>A estrutura desse comando é "instance-user-name@instance-public-dns-name";</li>
 <li>Verifique se o valor do Port está em 22;</li>
 <li>Em Tipo de conexão, selecione SSH;</li>
-<li>No painel do lado esquedo, expanda o menu Connection, depois faça o mesmo com o menu SSH e o menu Auth. Escolha a opção Credentials</li>
+<li>No painel do lado esquerdo, expanda o menu Connection, depois faça o mesmo com o menu SSH e o menu Auth. Escolha a opção Credentials</li>
 <li>Em Public-key authentication, na caixa Private Key file for authentication, clique em Browse;</li>
 <li>Basta selecionar o arquivo do par de chaves em formato .ppk que salvamos anteriormente;</li>
-<li>Clique em Open, na parte inferior e pronto, o PuTTY fará o acesso à instância EC2 criada e informana, caso as informações de DNS público e o arquivo .ppk estejam corretos;</li>
+<li>Clique em Open, na parte inferior e pronto, o PuTTY fará o acesso à instância EC2 criada, caso as informações de DNS público e o arquivo .ppk estejam corretos;</li>
 <li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept;</li>
-<li>Em seguida, será aberta a tela do terminal da máquina windows da instância.</li>
+<li>Em seguida, será aberta a tela do terminal da máquina Windows da instância.</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/98cb43a4-9c71-4cd0-908e-342f885559c6" alt="Texto Alternativo">
 </ol>
 
@@ -192,10 +192,10 @@ Estando com o PuTTY instalado:
 A partir de agora nossas ações serão feitas no terminal Linux da instância EC2 que o PuTTY nos conectou.<br>
 Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilégios administrativos.
 <ol>
-<li>Execute o comande de atualização do sistema <code>sudo yum update -y</code> antes de iniciar instalações, para garantir que serão sempre as versões mais atualizadas dos arquivos Linux que estarão rodando;</li>
+<li>Execute o comande de atualização do sistema <code>sudo yum update -y</code> antes de iniciar instalações, para garantir que serão sempre as versões mais atualizadas dos arquivos Linux que rodarão;</li>
 <li>Com o comando <code>sudo yum install -y amazon-efs-utils</code> instale o pacote para suporte ao NFS. É um protocolo que permite compartilhar diretórios e arquivos entre sistemas operacionais em uma rede.;</li>
 <li>Utilize o comando <code>sudo mkdir /mnt/efs</code> para criar um diretório local que servirá como ponto de montagem;</li>
-<li>Agora vamos montar o sistema de arquivos. Para isso, é preciso utilizar o comando que foi copiado anteriormente, <code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>, lembrando que cada um terá o seu próprio DNS, diponibilizado nos detalhes do serviço na AWS, e caminho local, que aqui foi nomeado como /mnt/efs;</li>
+<li>Agora vamos montar o sistema de arquivos. Para isso, é preciso utilizar o comando que foi copiado anteriormente, <code>sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 [DNS do EFS]:/ [caminho local]</code>, lembrando que cada um terá o seu próprio DNS, disponibilizado nos detalhes do serviço na AWS, e caminho local, que aqui foi nomeado como /mnt/efs;</li>
     <h4>Configurando montagem automática</h4>
     Também é possível realizar uma configuração para que a montagem ocorra automaticamente.
     <ol>
@@ -214,7 +214,7 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 <li>Para o Apache iniciar automaticamente, execute o comando <code>sudo systemctl enable httpd</code>;</li>
 <li>Verifique se o apache está em execução através do comando <code>sudo systemctl status httpd</code>;</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/afeb0b4e-569d-4861-a127-9646ab44a87c" alt="Texto Alternativo">
-<li>O Apache já vem com uma página inicial padrão que pode ser acessada atravé da digitação do IP público na barra de endereço de um navegador. Mas também é possível editar essa página HTML para que exiba o que você quiser. Isso é feito a partir de um arquivo index que pode ser criado dentro do diretório do Apache;</li>
+<li>O Apache já vem com uma página inicial padrão que pode ser acessada através da digitação do IP público na barra de endereço de um navegador. Mas também é possível editar essa página HTML para que exiba o que você quiser. Isso é feito a partir de um arquivo index que pode ser criado dentro do diretório do Apache;</li>
 <li>Para criar/editar esse arquivo, digite o comando <code>sudo nano index.html</code>. O arquivo HTML que você digitar nesse documento é o que será mostrado na página acessada pelo IP público. Veja a seguir um exemplo de documento HTML para o serviço:</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/8e9df0a5-8920-4ad7-b661-7cc3b7367887" alt="Texto Alternativo">
 <li>Para salvar o documento no editor nano, aperte ctrl+x, depois y e confirme apertando enter;</li>
@@ -222,7 +222,7 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/90610cad-f8c4-44fb-81d3-393939ef543e" alt="Texto Alternativo">
 </ol>
 
-<h3>LINUX >> Criando um script que valide se o serviço está online ou ofline e envie o resultado da validação para o seu diretório no NFS 📃 </h3>
+<h3>LINUX >> Criando um script que valide se o serviço está online ou offline e envie o resultado da validação para o seu diretório no NFS 📃 </h3>
 Para criar um script será necessário utilizar um editor de texto (utilizaremos o nano) e, ao final do nome do arquivo, devemos atribuir a extensão .sh.<br>
 Devemos lembrar que, para essa atividade, o script deve conter data, hora, nome do serviço, status e mensagem personalizada de ONLINE ou OFFLINE.<br>
 O script também deve gerar 2 arquivos de saída: um para o serviço online e outro para o serviço offline.
@@ -240,7 +240,7 @@ O script também deve gerar 2 arquivos de saída: um para o serviço online e ou
 </ol>
 
 <h3>Linux >> Preparando a execução automatizada do script a cada 5 minutos 🤖 </h3>
-Para o agendamento da execução do script vamos utilizar o comando crontab. Normmalmente o crontab abre um arquivo com o programa vi de edição de texto. Sendo o vi não muito prático, é possível modificar para que a abertura ocorra com o nano, muito mais intuitivo e semelhante aos editores de texto convencionais.
+Para o agendamento da execução do script vamos utilizar o comando crontab. Normalmente o crontab abre um arquivo com o programa vi de edição de texto. Sendo o vi não muito prático, é possível modificar para que a abertura ocorra com o nano, muito mais intuitivo e semelhante aos editores de texto convencionais.
 <ol>
 <li>Digite o comando <code>EDITOR=nano crontab -e</code>, para que o nano abra o arquivo crontab;</li>
 <li>Dentro do arquivo digite a linha <code>*/5 * * * * /[caminho de onde está o script/nome do script]</code>. Em nosso caso, ficou dessa forma: <code>*/5 * * * * /mnt/efs/sergio/service_status.sh</code></li>
@@ -248,7 +248,7 @@ Para o agendamento da execução do script vamos utilizar o comando crontab. Nor
 <li>Para verificar se a automatização está funcionando, é preciso abrir os arquivos .txt que foram programados para serem criados e guardar as informações da verificação do serviço online e offline. Como a automatização faz com que a verificação programada pelo script ocorra a cada 5 minutos, dê algum tempo para que o arquivo .txt seja atualizado algumas vezes;</li>
 <li>Na imagem abaixo temos a demonstração do arquivo httpd-online.txt exibindo as informações da validação online após o crontab realizar a automatização algumas vezes:</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/1ef9f8f9-a835-428d-aacd-b5c4d24ff001" alt="Demonstração do funcionamento do crontab online">
-<li>Para fazermos a confirmação de que o script realiza a verificação do serviço offline é preciso interromper o Apache com o comando <code>sudo systemctl stop httpd</code>. Dessa forma, basta aguardar alguns minutos para que o crontap continue a executar o script a cada 5 minutos e poderemos ver a criação do artivo httpd-offline.txt, que exibe os momentos em que o status do serviço estava offline, conforme imagem abaixo:</li>
+<li>Para fazermos a confirmação de que o script realiza a verificação do serviço offline é preciso interromper o Apache com o comando <code>sudo systemctl stop httpd</code>. Dessa forma, basta aguardar alguns minutos para que o crontap continue a executar o script a cada 5 minutos e poderemos ver a criação do arquivo httpd-offline.txt, que exibe os momentos em que o status do serviço estava offline, conforme imagem abaixo:</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/7f8aeded-b35b-4d15-abd7-c977d4aeb7fb" alt="Demonstração do funcionamento do crontab offline">
 <li>Ainda, é possível verificarmos que os arquivos .txt foram criados dentro do diretório indicado no script:</li>
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/86e61ae4-e027-45a6-a360-5075ec43f803" alt="Demonstração dos arquivos de texto no diretório">
