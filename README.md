@@ -231,3 +231,28 @@ O script também deve gerar 2 arquivos de saída: um para o serviço online e ou
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/9dcaacab-8097-46bb-bd77-eee725b9f1c0" alt="Script em funcionamento">
 <li>Note que o documento informa a data e a hora em que a verificação foi feita, assim como o nome do serviço verificado e uma mensagem indicando que o mesmo está online.</li>
 </ol>
+
+<h3>Linux >> Preparando a execução automatizada do script a cada 5 minutos</h3>
+Para o agendamento da execução do script vamos utilizar o comando crontab. Normmalmente o crontab abre um arquivo com o programa vi de edição de texto. Sendo o vi não muito prático, é possível modificar para que a abertura ocorra com o nano, muito mais intuitivo e semelhante aos editores de texto convencionais.
+<ol>
+<li>Digite o comando <code>EDITOR=nano crontab -e</code>, para que o nano abra o arquivo crontab;</li>
+<li>Dentro do arquivo digite a linha <code>*/5 * * * * /[caminho de onde está o script/nome do script]</code>. Em nosso caso, ficou dessa forma: <code>*/5 * * * * /mnt/efs/sergio/service_status.sh</code></li>
+<li>Salve o arquivo e feche o editor.</li>
+<li>Para verificar se a automatização está funcionando, é preciso abrir os arquivos .txt que foram programados para serem criados e guardar as informações da verificação do serviço online e offline. Como a automatização faz com que a verificação programada pelo script ocorra a cada 5 minutos, dê algum tempo para que o arquivo .txt seja atualizado algumas vezes;</li>
+<li>Na imagem abaixo temos a demonstração do arquivo httpd-online.txt exibindo as informações da validação online após o crontab realizar a automatização algumas vezes:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/1ef9f8f9-a835-428d-aacd-b5c4d24ff001" alt="Demonstração do funcionamento do crontab online">
+<li>Para fazermos a confirmação de que o script realiza a verificação do serviço offline é preciso interromper o Apache com o comando <code>sudo systemctl stop httpd</code>. Dessa forma, basta aguardar alguns minutos para que o crontap continue a executar o script a cada 5 minutos e poderemos ver a criação do artivo httpd-offline.txt, que exibe os momentos em que o status do serviço estava offline, conforme imagem abaixo:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/7f8aeded-b35b-4d15-abd7-c977d4aeb7fb" alt="Demonstração do funcionamento do crontab offline">
+<li>Ainda, é possível verificarmos que os arquivos .txt foram criados dentro do diretório indicado no script:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/86e61ae4-e027-45a6-a360-5075ec43f803" alt="Demonstração dos arquivos de texto no diretório">
+</ol>
+
+<h3>Referências para a realização da atividade</h3>
+Documentação oficial Amazon AWS: https://docs.aws.amazon.com/pt_br/ <br>
+Guia Linux Unirio: https://guialinux.uniriotec.br/ <br>
+
+<br>
+
+Esta documentação foi formulada por Sérgio Luiz Ferreira de Freitas a partir da atividade realizada e proposta no contexto do Programa de Bolsas e Estágio AWS e DecSecOps na Compass UOL no primeiro semestre de 2024.
+
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/191d63f4-4eb3-4780-b902-aae6fc8aa56d" alt="Compass Uol logo">
