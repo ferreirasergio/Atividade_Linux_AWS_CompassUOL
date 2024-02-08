@@ -26,7 +26,7 @@ A execução do projeto se dará em duas partes: a primeira ocorrerá dentro do 
 </ul>
 
 <h2>Execução da atividade</h2>
-⚠️Atenção! É importante lembrar que essa atividade está sendo documentada em fevereiro de 2024, sendo assim, dependendo do momento em que você esteja lendo a documentação, a disposição dos elementos nas páginas pode ter sido modificada, assim como a disponibilização dos recursos AWS e comandos Linux⚠️
+⚠️Atenção! É importante lembrar que essa atividade está sendo documentada em fevereiro de 2024, sendo assim, dependendo do momento em que você esteja lendo a documentação, a disposição dos elementos nas páginas pode ter sido modificada, assim como a disponibilização dos recursos AWS e comandos Linux.⚠️
 
 <h3>AWS >> Geração de chave pública para acesso ao ambiente 🔑</h3>
 Inicialmente, devemos lembrar que é possível criar uma chave pública de duas formas no console AWS: na opção "Pares de Chaves", no menu Rede e Segurança do Painel EC2; e durante a criação de uma instância EC2, no momento de configurações da instância. Aqui, iremos criar a chave antes de criarmos a instância.
@@ -260,6 +260,7 @@ Guia Linux Unirio: https://guialinux.uniriotec.br/ <br>
 
 <br>
 
-Esta documentação foi formulada por Sérgio Luiz Ferreira de Freitas a partir da atividade realizada e proposta no contexto do Programa de Bolsas e Estágio AWS e DecSecOps na Compass UOL no primeiro semestre de 2024.
+Esta documentação foi formulada por Sérgio Luiz Ferreira de Freitas a partir da atividade realizada e proposta no contexto do Programa de Bolsas e Estágio AWS e DecSecOps na Compass UOL no primeiro semestre de 2024.<br>
+Ao longo da atividade deixamos alguns endereços IP explícitos, o que não é uma boa prática de segurança, no entanto, as máquinas criadas e utilizadas para essa atividade não estão mais disponíveis, tendo sido criadas exclusivamente para a execução da tarefa e sua demonstração.
 
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/191d63f4-4eb3-4780-b902-aae6fc8aa56d" alt="Compass Uol logo">
