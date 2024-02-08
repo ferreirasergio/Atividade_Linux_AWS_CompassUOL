@@ -17,16 +17,16 @@ A execução do projeto se dará em duas partes: a primeira ocorrerá dentro do 
 <h4>Requisitos Linux</h4>
 <ul>
 <li>Configurar o NFS entregue;</li>
-<li>Criar um diretorio dentro do filesystem do NFS com seu nome;</li>
+<li>Criar um diretório dentro do filesystem do NFS com seu nome;</li>
 <li>Subir um apache no servidor - o apache deve estar online e rodando;</li>
-<li>Criar um script que valide se o serviço esta online e envie o resultado da validação para o seu diretorio no nfs;</li>
+<li>Criar um script que valide se o serviço está online e envie o resultado da validação para o seu diretório no NFS;</li>
 <li>O script deve conter - Data HORA + nome do serviço + Status + mensagem personalizada de ONLINE ou offline;</li>
 <li>O script deve gerar 2 arquivos de saida: 1 para o serviço online e 1 para o serviço OFFLINE;</li>
 <li>Preparar a execução automatizada do script a cada 5 minutos.</li>
 </ul>
 
 <h2>Execução da atividade</h2>
-⚠️Atenção! É importante lembrar que essa atividade está sendo documentada em fevereiro de 2024, sendo assim, dependendo do momento em que você esteja lendo a documentação, a disposição dos elementos pode ter sido modificada, assim como a disponibilização dos recursos AWS e comandos Linux⚠️
+⚠️Atenção! É importante lembrar que essa atividade está sendo documentada em fevereiro de 2024, sendo assim, dependendo do momento em que você esteja lendo a documentação, a disposição dos elementos nas páginas pode ter sido modificada, assim como a disponibilização dos recursos AWS e comandos Linux⚠️
 
 <h3>AWS >> Geração de chave pública para acesso ao ambiente 🔑</h3>
 Inicialmente, devemos lembrar que é possível criar uma chave pública de duas formas no console AWS: na opção "Pares de Chaves", no menu Rede e Segurança do Painel EC2; e durante a criação de uma instância EC2, no momento de configurações da instância. Aqui, iremos criar a chave antes de criarmos a instância.
@@ -203,11 +203,31 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 </ol>
 
 <h3>Linux >> Configurando Apache</h3>
+<ol>
+<li>Atualize os pacotes do sistema com o comando <code>sudo yum update -y</code>;</li>
+<li>Instale o Apache com o comando <code>sudo yum install httpd -y</code>;</li>
+<li>Inicie o Apache no sistema com o comando <code>sudo systemctl start httpd</code> ou ainda o <code>sudo /bin/systemctl start httpd.service</code>;</li>
+<li>Para o Apache iniciar automaticamente, execute o comando <code>sudo systemctl enable httpd</code>;</li>
+<li>Verifique se o apache está em execução através do comando <code>sudo systemctl status httpd</code>;</li>
+O Apache já vem com uma página inicial padrão que pode ser acessada atravé da digitação do IP público na barra de endereço de um navegador. Mas também é possível editar essa página HTML para que exiba o que você quiser. Isso é feito a partir de um arquivo index que pode ser criado dentro do diretório do Apache.
+<li>Para criar/editar esse arquivo, digite o comando <code>sudo nano index.html</code>. O arquivo HTML que você digitar nesse documento é o que será mostrado na página acessada pelo IP público. Veja a seguir um exemplo de documento HTML para o serviço:</li>
+<li>Para salvar o documento no editor nano, aperte ctrl+x, depois y e confirme apertando enter;</li>
+<li>Para acessar a página e ver se funcionou, basta colar o IP público da instância (informação disponível nos detalhes da instância na AWS) na barra de endereço de um navegador.</li>
+</ol>
 
-
-
-
-
-
-
-
+<h3>LINUX >> Criando um script que valide se o serviço está online ou ofline e envie o resultado da validação para o seu diretório no NFS</h3>
+Para criar um script será necessário utilizar um editor de texto (utilizaremos o nano) e, ao final do nome do arquivo, devemos atribuir a extensão .sh.<br>
+Devemos lembrar que, para essa atividade, o script deve conter data, hora, nome do serviço, status e mensagem personalizada de ONLINE ou OFFLINE.<br>
+O script também deve gerar 2 arquivos de saída: um para o serviço online e outro para o serviço offline.
+<ol>
+<li>Execute o comando <code>nano service_status.sh</code> para criar e abrir o arquivo do script. É importante criar o script dentro do diretório EFS. Aqui vamos salvá-lo no caminho /mnt/efs/sergio;</li>
+<li>Dentro do arquivo, digite o script desejado. O script criado para essa atividade pode ser observado na imagem a seguir:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/6c623fa7-81b9-4474-9c4a-6eacf97a7ff0" alt="Exemplo de script">
+<li>Note que, no exemplo acima, dentro do esquema "if/else", já indicamos que a operação deve criar, no caminho do diretório indicado, e enviar dois arquivos em formato .txt com os resultados da verificação. Sendo um arquivo para o resultado online e outro para o resultado offline;</li>
+<li>Salve o arquivo do script;</li>
+<li>Para tornar o arquivo do script executável digite o comando <code>sudo chmod +x [nome do script]</code>, sendo, nesse caso, <code>sudo chmod +x service_status.sh</code>;</li>
+<li>Estando no diretório onde o script foi criado e ativado, execute o comando <code>./service_status.sh</code> para executá-lo. Caso esteja funcionando corretamente e o serviço esteja online, o script vai criar o documento .txt que guarda as informações da validação online;</li>
+<li>Esse documento pode ser lido com o comando cat + nome do documento: <code>cat httpd-online.txt</code>. É possível verificar o funcionamento do script na imagem abaixo:</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/9dcaacab-8097-46bb-bd77-eee725b9f1c0" alt="Script em funcionamento">
+<li>Note que o documento informa a data e a hora em que a verificação foi feita, assim como o nome do serviço verificado e uma mensagem indicando que o mesmo está online.</li>
+</ol>
