@@ -126,6 +126,37 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
     Alvo: Escolha Gateway de internet e, abaixo, selecione o gateway que criamos anteriormente<br></li>
 <li>Clique em Salvar alterações.</li>
 </ol>
+
+<h3>AWS >> Servidor NFS a partir do Elastic File System (EFS) - Security Group 📂</h3>
+Para configurarmos um servidor NFS na máquina Linux nos próximos passos, vamos utilizar o serviço EFS da própria AWS.<br>
+Antes, vamos configurar um grupo de segurança que será utilizada para a rede do EFS mais adiante.
+<ol>
+<li> Vá até o Painel EC2 da AWS e clique em Security groups;</li>
+<li>Clique em Criar grupo de segurança;</li>
+<li>Atribua um nome;</li>
+<li>Selecione a mesma VPC em que se encontra a instância. Ela aparecerá listada para você;</li>
+<li>Em Regras de entrada adicione uma nova regra seguindo o modelo abaixo:</li>
+
+| Tipo | Protocolo | Intervalo de portas | Origem | Descrição|
+| --- | --- | --- | --- | --- |
+| NFS | TCP | 2049 | Grupo de segurança da instância | NFS | 
+<br>
+<li>Quando for escolher o campo Origem, escolha a opção Personalizado e, na caixa ao lado, role a barra até encontrar o grupo de segurança que foi criado para a instância EC2 que vamos acessar. Dessa forma, os dois grupos de segurança estarão conectados, cada um com seu objetivo.</li>
+<li>Clique em Criar grupo de segurança para finalizar.</li>
+</ol>
+
+<h3>AWS >> Criando o serviço de Elastic File System (EFS)</h3>
+<ol>
+<li>No console AWS, navegue até o serviço de EFS;</li>
+<li>No menu lateral esquerdo, clique em Sistemas de arquivos e, na sequência, em Criar sistema de arquivos;</li>
+<li>Adicione um nome para o sistema de arquivos e selecione a opção Personalizar;</li>
+<li>Marque a opção One zone e selecione a mesma zona de disponibilidade em que sua instância foi criada e avance;</li>
+<li>Mantenha as opções pré-definidas, altere apenas o grupo de segurança para o grupo que criamos para o serviço EFS;</li>
+<li>Revise as informações e clique em Criar para terminar;</li>
+<li>Na lista de sistemas criados, abra o sistema de arquivos recém feito e clique no botão Anexar para visualizar as opções de montagem (IP ou DNS);</li>
+<li>A AWS já nos apresenta comandos definidos de acordo com as opções escolhidas. Aqui, vamos utilizar a montagem via DNS usando o cliente do NFS. Copie-o e salve em um bloco de notas, pois irá precisar dele mais adiante.</li>
+</ol>
+
 <br>
 👍 Pronto! Nossas configurações do ambiente AWS estão prontas. Agora seguimos para as configurações da máquina Linux, o acesso da instância e a realização de alguns comandos. 👍
 <br>
@@ -135,6 +166,7 @@ Antes de iniciarmos os próximos passos será preciso:
 <li>Baixar e instalar a versão mais atualizada do PuTTY, de preferência diretamente da página oficial. O PuTTY é um cliente SSH gratuito para Windows.</li>
 <li>Ir até os detalhes da sua instância EC2, no console AWS, e copiar as informações do DNS público. Esse informação geralmente termina com os termos "amazonaws.com".</li>
 </ul>
+
 <h3>Putty >> Acessando a instância via PuTTY</h3>
 <ol>
 <li>Inicie o PuTTY em sua máquina;</li>
@@ -147,8 +179,13 @@ Antes de iniciarmos os próximos passos será preciso:
 <li>Em Public-key authentication, na caixa Private Key file for authentication, clique em Browse;</li>
 <li>Basta selecionar o arquivo do par de chaves em formato .ppk que salvamos anteriormente;</li>
 <li>Clique em Open, na parte inferior e pronto, o PuTTY fará o acesso à instância EC2 criada e informana, caso as informações de DNS público e o arquivo .ppk estejam corretos;</li>
-<li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept.</li>
+<li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept;</li>
+<li>Em seguida, será aberta a tela do terminal da máquina windows da instância.</li>
 </ol>
+
+
+
+
 
 
 
