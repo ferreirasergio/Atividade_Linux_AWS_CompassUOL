@@ -6,7 +6,7 @@ A atividade tem como objetivo colocar em prática alguns conceitos e funcionalid
 <h2>Requisitos Iniciais</h2>
 A execução do projeto se dará em duas partes: a primeira ocorrerá dentro do ambiente da AWS; a segunda, dentro de um ambiente Linux. Cada uma dessas etapas precisa atender a alguns requisitos básicos, sendo eles:
 
-<h4>Requisitos AWS</h4>
+<h4>Requisitos AWS ✅ </h4>
 <ul>
 <li>Gerar uma chave pública para acesso ao ambiente;</li>
 <li>Criar 1 instância EC2 com o sistema operacional Amazon Linux 2 (Família t3.small, 16 GB SSD);</li>
@@ -14,7 +14,7 @@ A execução do projeto se dará em duas partes: a primeira ocorrerá dentro do 
 <li>Liberar as portas de comunicação para acesso público: (22/TCP, 111/TCP e UDP, 2049/TCP/UDP, 80/TCP, 443/TCP).</li>
 </ul>
 
-<h4>Requisitos Linux</h4>
+<h4>Requisitos Linux ✅ </h4>
 <ul>
 <li>Configurar o NFS entregue;</li>
 <li>Criar um diretório dentro do filesystem do NFS com seu nome;</li>
@@ -52,6 +52,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Em Par de Chaves, selecione a chave criada anteriormente;</li>
 <li>Em configurações de Rede, selecione a opção Criar Grupo de segurança;</li>
 <li>Ainda nessa seção, deixe marcada a opção Permitir tráfego SSH de Qualquer Lugar (0.0.0.0/0);</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/fabfc238-64b7-47bc-b5b8-71e2aed69da2" alt="Tráfego SSH">
 <li>Em Configurar Armazenamento, coloque 16gb de armazenamento gp2(SSD);</li>
 <li>Revise as configurações e clique em Executar Instância.</li>
 </ol>
@@ -77,9 +78,10 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Selecione a instância EC2 criada anteriormente;</li>
 <li>Depois de selecionar a instância será preciso selecionar o endereço IP privado, que será sugerido pela própria plataforma, bastando confirmar;</li>
 <li>Marque a opção Permitir que o endereço IP elástico seja reassociado e clique em Associar.</li>
+<img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/a4cc2779-bca8-4757-868f-675e3664dbc6" alt="Elastic IP">
 </ol>
 
-<h3>AWS >> Liberar as portas de comunicação para acesso público</h3>
+<h3>AWS >> Liberar as portas de comunicação para acesso público 🌐 </h3>
 <ol>
 <li>Na página do serviço EC2, no menu lateral esquerdo, em Rede e Segurança, clique em Security groups;</li>
 <li>Selecione o grupo de segurança que foi criado juntamente com a instância EC2;</li>
@@ -103,7 +105,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 
 ⚠️Como iremos acessar a instância via Putty a partir de uma máquina Windows, deveremos configurar ainda a Tabela de rotas principal e da Sub-rede, caso contrário, o Putty poderá não acessar a instância, informando erro de conexão. ⚠️
 
-<h3>AWS >> Configurar rota de internet</h3>
+<h3>AWS >> Configurar rota de internet 🔃 </h3>
 <ol>
 <li>Acesse o Painel do serviço VPC e clique em Tabelas de rotas, no menu lateral esquerdo;</li>
 <li>Selecione a tabela de rotas principal da VPC da instância EC2 criada anteriormente. Geralmente é a primeira da lista;</li>
@@ -115,7 +117,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li>Clique em Salvar alterações.</li>
 </ol>
 
-<h3>AWS >> Configurar rota de sub-rede</h3>
+<h3>AWS >> Configurar rota de sub-rede ↩️ </h3>
 <ol>
 <li>Antes de configurarmos a rota da sub-rede, é preciso ir até o Painel EC2, clicar na opção Intâncias, selecionar a instância criada na lista e verificar nos detalhes abaixo em qual sub-rede ela está localizada. Munidos dessa informação, retornamos para o Painel VPC, no mesmo campo Tabela de rotas que entramos na configuração anterior;</li>
 <li>Selecione apenas e exatamente a sub-rede na qual a instância EC2 criada está localizada;</li>
@@ -145,7 +147,7 @@ Antes, vamos configurar um grupo de segurança que será utilizada para a rede d
 <li>Clique em Criar grupo de segurança para finalizar.</li>
 </ol>
 
-<h3>AWS >> Criando o serviço de Elastic File System (EFS)</h3>
+<h3>AWS >> Criando o serviço de Elastic File System 🗄️ (EFS)</h3>
 <ol>
 <li>No console AWS, navegue até o serviço de EFS;</li>
 <li>No menu lateral esquerdo, clique em Sistemas de arquivos e, na sequência, em Criar sistema de arquivos;</li>
@@ -186,7 +188,7 @@ Estando com o PuTTY instalado:
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/98cb43a4-9c71-4cd0-908e-342f885559c6" alt="Texto Alternativo">
 </ol>
 
-<h3>Linux >> Montando o sistema de arquivos do EFS na máquina</h3>
+<h3>Linux >> Montando o sistema de arquivos do EFS na máquina 📄 </h3>
 A partir de agora nossas ações serão feitas no terminal Linux da instância EC2 que o PuTTY nos conectou.<br>
 Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilégios administrativos.
 <ol>
@@ -204,7 +206,7 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
     </ol>
 </ol>
 
-<h3>Linux >> Configurando Apache</h3>
+<h3>Linux >> Configurando Apache 📤 </h3>
 <ol>
 <li>Atualize os pacotes do sistema com o comando <code>sudo yum update -y</code>;</li>
 <li>Instale o Apache com o comando <code>sudo yum install httpd -y</code>;</li>
@@ -220,7 +222,7 @@ Caso necessário, entre com o comando <code>sudo su</code> para ganhar privilég
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/90610cad-f8c4-44fb-81d3-393939ef543e" alt="Texto Alternativo">
 </ol>
 
-<h3>LINUX >> Criando um script que valide se o serviço está online ou ofline e envie o resultado da validação para o seu diretório no NFS</h3>
+<h3>LINUX >> Criando um script que valide se o serviço está online ou ofline e envie o resultado da validação para o seu diretório no NFS 📃 </h3>
 Para criar um script será necessário utilizar um editor de texto (utilizaremos o nano) e, ao final do nome do arquivo, devemos atribuir a extensão .sh.<br>
 Devemos lembrar que, para essa atividade, o script deve conter data, hora, nome do serviço, status e mensagem personalizada de ONLINE ou OFFLINE.<br>
 O script também deve gerar 2 arquivos de saída: um para o serviço online e outro para o serviço offline.
@@ -237,7 +239,7 @@ O script também deve gerar 2 arquivos de saída: um para o serviço online e ou
 <li>Note que o documento informa a data e a hora em que a verificação foi feita, assim como o nome do serviço verificado e uma mensagem indicando que o mesmo está online.</li>
 </ol>
 
-<h3>Linux >> Preparando a execução automatizada do script a cada 5 minutos</h3>
+<h3>Linux >> Preparando a execução automatizada do script a cada 5 minutos 🤖 </h3>
 Para o agendamento da execução do script vamos utilizar o comando crontab. Normmalmente o crontab abre um arquivo com o programa vi de edição de texto. Sendo o vi não muito prático, é possível modificar para que a abertura ocorra com o nano, muito mais intuitivo e semelhante aos editores de texto convencionais.
 <ol>
 <li>Digite o comando <code>EDITOR=nano crontab -e</code>, para que o nano abra o arquivo crontab;</li>
@@ -252,7 +254,7 @@ Para o agendamento da execução do script vamos utilizar o comando crontab. Nor
 <img src="https://github.com/ferreirasergio/Atividade_Linux_AWS_CompassUOL/assets/105258064/86e61ae4-e027-45a6-a360-5075ec43f803" alt="Demonstração dos arquivos de texto no diretório">
 </ol>
 
-<h3>Referências para a realização da atividade</h3>
+<h3>Referências para a realização da atividade 📚 </h3>
 Documentação oficial Amazon AWS: https://docs.aws.amazon.com/pt_br/ <br>
 Guia Linux Unirio: https://guialinux.uniriotec.br/ <br>
 
