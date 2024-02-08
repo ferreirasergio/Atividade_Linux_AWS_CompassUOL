@@ -103,7 +103,7 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 <li> Clique em Salvar regras.</li>
 </ol>
 
-⚠️Como iremos acessar a instância via Putty a partir de uma máquina Windows, deveremos configurar ainda a Tabela de rotas principal e da Sub-rede, caso contrário, o Putty poderá não acessar a instância, informando erro de conexão. ⚠️
+⚠️Como iremos acessar a instância via PuTTY a partir de uma máquina Windows, deveremos configurar ainda a Tabela de rotas principal e da Sub-rede, caso contrário, o PuTTY poderá não acessar a instância, informando erro de conexão. ⚠️
 
 <h3>AWS >> Configurar rota de internet 🔃 </h3>
 <ol>
@@ -170,7 +170,7 @@ Antes de iniciarmos os próximos passos será preciso:
 <li>Ir até os detalhes da sua instância EC2, no console AWS, e copiar as informações do DNS público. Esse informação geralmente termina com os termos "amazonaws.com".</li>
 </ul>
 Estando com o PuTTY instalado:
-<h3>Putty >> Acessando a instância via PuTTY</h3>
+<h3>PuTTY >> Acessando a instância via PuTTY</h3>
 <ol>
 <li>Inicie o PuTTY em sua máquina;</li>
 <li>No painel Category, no lado esquerdo, selecione Session;</li>
