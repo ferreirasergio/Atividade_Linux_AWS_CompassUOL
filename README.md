@@ -128,6 +128,28 @@ Inicialmente, devemos lembrar que é possível criar uma chave pública de duas 
 </ol>
 <br>
 👍 Pronto! Nossas configurações do ambiente AWS estão prontas. Agora seguimos para as configurações da máquina Linux, o acesso da instância e a realização de alguns comandos. 👍
+<br>
+
+Antes de iniciarmos os próximos passos será preciso:
+<ul>
+<li>Baixar e instalar a versão mais atualizada do PuTTY, de preferência diretamente da página oficial. O PuTTY é um cliente SSH gratuito para Windows.</li>
+<li>Ir até os detalhes da sua instância EC2, no console AWS, e copiar as informações do DNS público. Esse informação geralmente termina com os termos "amazonaws.com".</li>
+</ul>
+<h3>Putty >> Acessando a instância via PuTTY</h3>
+<ol>
+<li>Inicie o PuTTY em sua máquina;</li>
+<li>No painel Category, no lado esquerdo, selecione Session;</li>
+<li>Na caixa Host Name digite o nome de usuário da instância (por padrão, nas máquinas Amazon Linux, é ec2-user), seguido de @ e o DNS público da instância (aquele que termina com "amazonaws.com.</li>
+<li>A estrutura desse comando é "instance-user-name@instance-public-dns-name";</li>
+<li>Verifique se o valor do Port está em 22;</li>
+<li>Em Tipo de conexão, selecione SSH;</li>
+<li>No painel do lado esquedo, expanda o menu Connection, depois faça o mesmo com o menu SSH e o menu Auth. Escolha a opção Credentials</li>
+<li>Em Public-key authentication, na caixa Private Key file for authentication, clique em Browse;</li>
+<li>Basta selecionar o arquivo do par de chaves em formato .ppk que salvamos anteriormente;</li>
+<li>Clique em Open, na parte inferior e pronto, o PuTTY fará o acesso à instância EC2 criada e informana, caso as informações de DNS público e o arquivo .ppk estejam corretos;</li>
+<li>Se essa for a primeira vez que você se conectou a essa instância, o PuTTY exibirá uma caixa de diálogo de alerta de segurança perguntando se você confia no host ao qual está se conectando. Escolha Accept.</li>
+</ol>
+
 
 
 
